@@ -26,6 +26,134 @@ router.get('/:id', async (req, res, next) => {
 	}
 });
 
+// Get a single discs by name
+router.get('/name/:name', async (req, res, next) => {
+	try {
+		const disc = await Disc.findOne({name: req.params.name});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs with speed X
+router.get('/speed/:speed', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Speed: req.params.speed});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs with glide X
+router.get('/glide/:glide', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Glide: req.params.glide});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs with turn X
+router.get('/turn/:turn', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Turn: req.params.turn});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs with fade X
+router.get('/fade/:fade', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Fade: req.params.fade});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs from manufacturer x with speed y
+router.get('/:manufacturer/speed/:speed', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Speed: req.params.speed, Manufacturer: req.params.manufacturer});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs from manufacturer x with glide y
+router.get('/:manufacturer/glide/:glide', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Glide: req.params.glide, Manufacturer: req.params.manufacturer});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs from manufacturer x with turn y
+router.get('/:manufacturer/turn/:turn', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Turn: req.params.turn, Manufacturer: req.params.manufacturer});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+// Get all discs from manufacturer x with fade y
+router.get('/:manufacturer/Fade/:turn', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Fade: req.params.fade, Manufacturer: req.params.manufacturer});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
+
+
 // Create a discs
 router.post('/', async (req, res, next) => {
 	try {

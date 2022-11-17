@@ -96,6 +96,20 @@ router.get('/fade/:fade', async (req, res, next) => {
 	}
 });
 
+// Get all discs from manufacturer x 
+router.get('/:manufacturer/all', async (req, res, next) => {
+	try {
+		const disc = await Disc.find({Manufacturer: req.params.manufacturer});
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
+
 // Get all discs from manufacturer x with speed y
 router.get('/:manufacturer/speed/:speed', async (req, res, next) => {
 	try {
@@ -154,42 +168,42 @@ router.get('/:manufacturer/Fade/:turn', async (req, res, next) => {
 
 
 
-// Create a discs
-router.post('/', async (req, res, next) => {
-	try {
-		const newDisc = await Disc.create(req.body);
-		res.status(201).json(newDisc);
-	} catch (error) {
-		next(error);
-	}
-});
+// // Create a discs
+// router.post('/', async (req, res, next) => {
+// 	try {
+// 		const newDisc = await Disc.create(req.body);
+// 		res.status(201).json(newDisc);
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// });
 
-// Update a single discs by id
-router.put('/:id', async (req, res, next) => {
-	try {
-		const discToUpdate = await Disc.findByIdAndUpdate(req.params.id, req.body, {
-			new: true,
-			overwrite: true,
-		});
-		res.json(discToUpdate);
-	} catch (error) {
-		next(error);
-	}
-});
+// // Update a single discs by id
+// router.put('/:id', async (req, res, next) => {
+// 	try {
+// 		const discToUpdate = await Disc.findByIdAndUpdate(req.params.id, req.body, {
+// 			new: true,
+// 			overwrite: true,
+// 		});
+// 		res.json(discToUpdate);
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// });
 
 // Delete a discs by id
-router.delete('/:id', async (req, res, next) => {
-	try {
-		const deletedDisc = await Disc.findOneAndDelete({
-			_id: req.params.id,
-		});
-		if (deletedDisc) {
-			res.json(deletedDisc);
-		} else {
-			res.sendStatus(404);
-		}
-	} catch (error) {
-		next(error);
-	}
-});
+// router.delete('/:id', async (req, res, next) => {
+// 	try {
+// 		const deletedDisc = await Disc.findOneAndDelete({
+// 			_id: req.params.id,
+// 		});
+// 		if (deletedDisc) {
+// 			res.json(deletedDisc);
+// 		} else {
+// 			res.sendStatus(404);
+// 		}
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// });
 module.exports = router;

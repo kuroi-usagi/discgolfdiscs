@@ -7,10 +7,14 @@ const DiscSchema = new mongoose.Schema({
 	Glide: Number,
 	Turn: Number,
 	Fade: Number,
-	Diameter: Number,
-	Height: Number,
-	RimDepth: Number,
-	RimWidth: Number,
+	MaxWeight: String,
+	Diameter: String,
+	Height: String,
+	RimDepth: String,
+	InsideRimDiameter: String,
+	RimDiamaterRatio: String,
+	RimConfiguration: String,
+	Flexibility: String
 });
 
 const Disc = mongoose.model('Disc', DiscSchema);

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Disc = require('../models/Disc');
 
-const DiscSeed = require('./disc.json');
+const DiscSeed = require('./allDiscs.json');
 
 allDiscs = DiscSeed.map((disc) => {
 	return { ...disc };

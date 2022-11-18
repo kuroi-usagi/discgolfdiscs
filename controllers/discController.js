@@ -29,7 +29,9 @@ router.get('/:id', async (req, res, next) => {
 // Get a single discs by name
 router.get('/name/:name', async (req, res, next) => {
 	try {
-		const disc = await Disc.findOne({name: req.params.name});
+		console.log('Name: ' + req.params.name)
+		const disc = await Disc.find({Name: req.params.name});
+		console.log(disc.Name)
 		if (disc) {
 			res.json(disc);
 		} else {

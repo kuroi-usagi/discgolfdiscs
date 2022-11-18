@@ -19,8 +19,6 @@ app.get('/', (req, res) => {
 /* START CONTROLLERS HERE */
 const discController = require('./controllers/discController');
 app.use('/discs', discController);
-// const manufacturerController = require('./controllers/manufacturerController');
-// app.use('/manufacturers', manufacturerController);
 
 /* END CONTROLLERS HERE */
 app.use((err, req, res, next) => {
@@ -38,7 +36,7 @@ app.use((err, req, res, next) => {
 
 app.listen(process.env.PORT || 3000, function () {
 	console.log(
-		'Express server listening on port %d in %s mode',
+		'Disc Golf Disc server listening on port %d in %s mode',
 		this.address().port,
 		app.settings.env
 	);

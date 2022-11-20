@@ -12,24 +12,15 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-// List a single discs by id
-router.get('/:id', async (req, res, next) => {
-	try {
-		const disc = await Disc.findById(req.params.id);
-		if (disc) {
-			res.json(disc);
-		} else {
-			res.sendStatus(404);
-		}
-	} catch (error) {
-		next(error);
-	}
-});
-
 // Get a single discs by name
 router.get('/name/:name', async (req, res, next) => {
 	try {
-		const disc = await Disc.find({Name: req.params.name});
+		const searchTerm = '/' + req.params.name + '/i';
+		const disc = await Disc.find({Name: {
+			"$regex": req.params.name,
+			"$options": "i"
+		}
+		});
 		if (disc) {
 			res.json(disc);
 		} else {
@@ -166,8 +157,32 @@ router.get('/:manufacturer/Fade/:turn', async (req, res, next) => {
 	}
 });
 
+router.get('/search', async (req, res, next) => {
+	try {
+		const { search_field1, search_value1, 
+				search_field2, search_value2, 
+				search_field3, search_value3,
+				search_field4, search_value4 } = req.query;
+		
+		const queryObj = {};
 
+		if (search_field1 !== '' && search_value1 !== '') {
+			queryObj[search_field1] = search_value1;
+			queryObj[search_field2] = search_value2;
+			queryObj[search_field3] = search_value3;
+			queryObj[search_field4] = search_value4;
+		}
 
+		const disc = await Disc.find(queryObj);
+		if (disc) {
+			res.json(disc);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (error) {
+		next(error);
+	}
+});
 // // Create a discs
 // router.post('/', async (req, res, next) => {
 // 	try {
